@@ -20,8 +20,8 @@
         <form th:action="@{/reservas/save}" method="post">
             <input type="hidden" th:value="${reserva.id}" name="id"/>
             <div class="mb-3">
-                <label for="fecha" class="form-label">Fecha:</label>
-                <input type="date" id="fecha" name="fecha" class="form-control" th:value="${reserva.fecha}" required/>
+                <label for="fechareserva" class="form-label">Fecha:</label>
+                <input type="date" id="fechareserva" name="fechareserva" class="form-control" th:value="${reserva.fechareserva}" required/>
             </div>
             <button type="submit" class="btn btn-success">Guardar</button>
         </form>

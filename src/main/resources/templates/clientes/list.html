@@ -29,18 +29,15 @@
             <tbody>
                 <!-- Iterar sobre los clientes -->
                 <tr th:each="cliente : ${clientes}">
-                    <td th:text="${cliente.id}">ID</td>
-                    <td th:text="${cliente.nombre}">Nombre</td>
-                    <td>
-                        <!-- Ver detalles del cliente -->
-                        <a th:href="@{/clientes/{id}(id=${cliente.id})}" class="btn btn-info btn-sm">Ver Detalles</a>
-                        <!-- Editar cliente -->
-                        <a th:href="@{/clientes/edit/{id}(id=${cliente.id})}" class="btn btn-warning btn-sm">Editar</a>
-                        <!-- Eliminar cliente -->
-                        <a th:href="@{/clientes/delete/{id}(id=${cliente.id})}" onclick="return confirm('¿Eliminar cliente?')" class="btn btn-danger btn-sm">Eliminar</a>
-                        
-                    </td>
-                </tr>
+    <td th:text="${cliente.id}">ID</td>  <!-- Mostrar ID generado automáticamente -->
+    <td th:text="${cliente.nombre}">Nombre</td>
+    <td>
+        <a th:href="@{/clientes/{id}(id=${cliente.id})}" class="btn btn-info btn-sm">Ver Detalles</a>
+        <a th:href="@{/clientes/edit/{id}(id=${cliente.id})}" class="btn btn-warning btn-sm">Editar</a>
+        <a th:href="@{/clientes/delete/{id}(id=${cliente.id})}" onclick="return confirm('¿Eliminar cliente?')" class="btn btn-danger btn-sm">Eliminar</a>
+    </td>
+</tr>
+                
             </tbody>
         </table>
     </div>

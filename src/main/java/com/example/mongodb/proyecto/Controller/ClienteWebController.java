@@ -45,8 +45,6 @@ public class ClienteWebController {
         return "clientes/form"; // Devuelve la vista del formulario para agregar un nuevo cliente
     }
 
-    
-
     @GetMapping("/{id}")
     public String getClienteById(@PathVariable String id, Model model) {
         Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Cliente no encontrado"));
@@ -56,28 +54,10 @@ public class ClienteWebController {
 
     @PostMapping("/save")
     public String saveCliente(@ModelAttribute Cliente cliente, Model model) {
-        // Si el cliente tiene un id, significa que estamos actualizando un cliente existente.
-        if (cliente.getId() != null) {
-            // Actualizamos el cliente
-            Cliente existingCliente = clienteRepository.findById(cliente.getId())
-                    .orElseThrow(() -> new NotFoundException("Cliente no encontrado"));
-            
-            // Actualizamos los campos del cliente
-            existingCliente.setNombre(cliente.getNombre());
-            existingCliente.setApellido(cliente.getApellido());
-            existingCliente.setTelefono(cliente.getTelefono());
-            existingCliente.setDireccion(cliente.getDireccion());
-
-            // Guardamos la entidad actualizada
-            clienteRepository.save(existingCliente);
-        } else {
-            // Si el cliente no tiene id, significa que es un nuevo cliente
-            clienteRepository.save(cliente);  // MongoDB generará el id automáticamente
-        }
+    	clienteRepository.save(cliente);
         return "redirect:/clientes"; // Redirige a la lista de clientes
     }
 
-    
     @GetMapping("/edit/{id}")
     public String editCliente(@PathVariable String id, Model model) {
         Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Cliente no encontrado"));
@@ -91,7 +71,7 @@ public class ClienteWebController {
         return "redirect:/clientes"; // Redirige a la lista de clientes después de eliminar
     }
 
-    // Métodos para reservas
+ // Métodos para reservas
     @GetMapping("/reservas")
     public String getAllReservas(Model model) {
         List<Reservas> reservas = reservasRepository.findAll();
@@ -107,10 +87,28 @@ public class ClienteWebController {
     }
 
     @PostMapping("/reservas/save")
-    public String saveReservas(@RequestBody Map<String, Object> body, Model model) {
-        ObjectMapper mapper = new ObjectMapper();
-        Reservas reservas = mapper.convertValue(body, Reservas.class);
-        reservasRepository.save(reservas);
-        return "redirect:/reservas"; // Redirige a la lista de reservas
+    public String saveReservas(@ModelAttribute Reservas reserva, Model model) {
+        reservasRepository.save(reserva);
+        return "redirect:/clientes/reservas"; // Redirige a la lista de reservas
     }
+
+    @GetMapping("/reservas/edit/{id}")
+    public String editReservas(@PathVariable String id, Model model) {
+        Reservas reserva = reservasRepository.findById(id).orElseThrow(() -> new NotFoundException("Reserva no encontrada"));
+        model.addAttribute("reserva", reserva);
+        return "reservas/form"; // Devuelve la vista del formulario para editar la reserva
+    }
+
+    @GetMapping("/reservas/delete/{id}")
+    public String deleteReservas(@PathVariable String id) {
+        reservasRepository.deleteById(id);
+        return "redirect:/clientes/reservas"; // Redirige a la lista de reservas después de eliminar
+    }
+
+    @GetMapping("/reservas/new")
+    public String newReserva(Model model) {
+        model.addAttribute("reserva", new Reservas()); // Crear una nueva reserva vacía
+        return "reservas/form"; // Devuelve la vista del formulario para agregar una nueva reserva
+    }
+
 }

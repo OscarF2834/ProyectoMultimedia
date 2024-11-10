@@ -16,7 +16,9 @@
 <body>
     <div class="container">
         <h1 class="text-center">Lista de Reservas</h1>
-        <a href="/reservas/new" class="btn btn-primary mb-3">Agregar Nueva Reserva</a>
+        <a href="/clientes/reservas/new" class="btn btn-primary mb-3">Agregar Nueva Reserva</a>
+        
+        
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -28,11 +30,12 @@
             <tbody>
                 <tr th:each="reserva : ${reservas}">
                     <td th:text="${reserva.id}"></td>
-                    <td th:text="${reserva.fecha}"></td>
+                    <td th:text="${reserva.fechareserva}"></td>
                     <td>
                         <a th:href="@{/reservas/{id}(id=${reserva.id})}" class="btn btn-info btn-sm">Ver Detalles</a>
-                        <a th:href="@{/reservas/edit/{id}(id=${reserva.id})}" class="btn btn-warning btn-sm">Editar</a>
-                        <a th:href="@{/api/cliente/reservas/{id}(id=${reserva.id})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar reserva?')">Eliminar</a>
+<a th:href="@{/reservas/edit/{id}(id=${reserva.id})}" class="btn btn-warning btn-sm">Editar</a>
+<a th:href="@{/reservas/delete/{id}(id=${reserva.id})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar reserva?')">Eliminar</a>
+                        
                     </td>
                 </tr>
             </tbody>
