@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @RestController
-@RequestMapping(value = "/api/cliente")
+@RequestMapping(value = "/api/empleado")
 public class EmpleadoRestController {
 	
 	@Autowired

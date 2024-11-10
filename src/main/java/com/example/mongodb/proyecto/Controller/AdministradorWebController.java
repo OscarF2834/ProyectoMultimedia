@@ -49,7 +49,7 @@ public class AdministradorWebController {
         ObjectMapper mapper = new ObjectMapper();
         Empleado empleado = mapper.convertValue(body, Empleado.class);
         empleadoRepository.save(empleado);
-        return "redirect:/empleados"; // Redirecciona a la lista de empleados
+        return "redirect:/administrador/empleados"; // Redirecciona a la lista de empleados
     }
 
     // Controlador para Productos
