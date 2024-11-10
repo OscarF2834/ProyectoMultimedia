@@ -42,7 +42,7 @@ public class AdministradorRestController {
         return empleadoRepository.findById(id).orElseThrow(() -> new NotFoundException("Empleado no encontrado"));
     }
 
-    @PostMapping("/empleados/")
+    @PostMapping("/save")
     public Empleado saveEmpleado(@RequestBody Map<String, Object> body) {
         ObjectMapper mapper = new ObjectMapper();
         Empleado empleado = mapper.convertValue(body, Empleado.class);

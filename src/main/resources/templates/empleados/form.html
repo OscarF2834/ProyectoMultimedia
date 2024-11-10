@@ -17,34 +17,34 @@
 <body>
     <div class="container">
         <h1 class="text-center">Formulario de Empleado</h1>
-        <form th:action="@{${empleado.id} != null ? '/administrador/empleados/editar/' + ${empleado.id} : '/administrador/empleados/save'}" method="post">
+        <form th:action="@{/administrador/empleados/save}" method="post" th:object="${empleado}">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" th:value="${empleado.nombre}" required/>
+                <input type="text" class="form-control" id="nombre" name="nombre" th:value="*{nombre}" required/>
             </div>
             <div class="mb-3">
                 <label for="apellido" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="apellido" name="apellido" th:value="${empleado.apellido}" required/>
+                <input type="text" class="form-control" id="apellido" name="apellido" th:value="*{apellido}" required/>
             </div>
             <div class="mb-3">
                 <label for="identificacion" class="form-label">Identificación</label>
-                <input type="text" class="form-control" id="identificacion" name="identificacion" th:value="${empleado.identificacion}" required/>
+                <input type="text" class="form-control" id="identificacion" name="identificacion" th:value="*{identificacion}" required/>
             </div>
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" th:value="${empleado.telefono}" required/>
+                <input type="text" class="form-control" id="telefono" name="telefono" th:value="*{telefono}" required/>
             </div>
             <div class="mb-3">
                 <label for="cargo" class="form-label">Cargo</label>
-                <input type="text" class="form-control" id="cargo" name="cargo" th:value="${empleado.cargo}" required/>
+                <input type="text" class="form-control" id="cargo" name="cargo" th:value="*{cargo}" required/>
             </div>
             <div class="mb-3">
                 <label for="salario" class="form-label">Salario</label>
-                <input type="number" class="form-control" id="salario" name="salario" th:value="${empleado.salario}" required/>
+                <input type="number" class="form-control" id="salario" name="salario" th:value="*{salario}" required/>
             </div>
             <div class="mb-3">
                 <label for="oficios" class="form-label">Oficios</label>
-                <input type="text" class="form-control" id="oficios" name="oficios" th:value="${empleado.oficios}" required/>
+                <input type="text" class="form-control" id="oficios" name="oficios" th:value="*{oficios}" required/>
             </div>
             <button type="submit" class="btn btn-success">Guardar</button>
             <a href="/administrador/empleados" class="btn btn-secondary">Cancelar</a>

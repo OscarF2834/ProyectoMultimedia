@@ -38,9 +38,10 @@
                         <a th:href="@{/administrador/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-warning btn-sm">Editar</a>
                         
                         <!-- Eliminar empleado -->
-                        <form th:action="@{/administrador/empleados/eliminar/{id}(id=${empleado.id})}" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        <form th:action="@{/administrador/empleados/delete/{id}(id=${empleado.id})}" method="post" style="display:inline;">
+                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                         </form>
+                        
                     </td>
                 </tr>
             </tbody>
