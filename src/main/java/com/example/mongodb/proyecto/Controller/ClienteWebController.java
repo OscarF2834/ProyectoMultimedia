@@ -54,7 +54,12 @@ public class ClienteWebController {
 
     @PostMapping("/save")
     public String saveCliente(@ModelAttribute Cliente cliente, Model model) {
-    	clienteRepository.save(cliente);
+        // Si el cliente no tiene id, MongoDB generará uno automáticamente.
+        if (cliente.getId() == null || cliente.getId().isEmpty()) {
+            clienteRepository.save(cliente);  // Guarda el cliente sin el id explícito
+        } else {
+            clienteRepository.save(cliente);  // Si el id ya está presente, actualiza el cliente
+        }
         return "redirect:/clientes"; // Redirige a la lista de clientes
     }
 
@@ -64,14 +69,13 @@ public class ClienteWebController {
         model.addAttribute("cliente", cliente);
         return "clientes/form"; // Devuelve la vista del formulario para editar el cliente
     }
-    
+
     @GetMapping("/delete/{id}")
     public String deleteCliente(@PathVariable String id) {
         clienteRepository.deleteById(id);
         return "redirect:/clientes"; // Redirige a la lista de clientes después de eliminar
     }
-
- // Métodos para reservas
+    // Métodos para reservas
     @GetMapping("/reservas")
     public String getAllReservas(Model model) {
         List<Reservas> reservas = reservasRepository.findAll();
@@ -81,16 +85,24 @@ public class ClienteWebController {
 
     @GetMapping("/reservas/{id}")
     public String getReservasById(@PathVariable String id, Model model) {
-        Reservas reservas = reservasRepository.findById(id).orElseThrow(() -> new NotFoundException("Reserva no encontrada"));
-        model.addAttribute("reserva", reservas);
+        Reservas reserva = reservasRepository.findById(id).orElseThrow(() -> new NotFoundException("Reserva no encontrada"));
+        model.addAttribute("reserva", reserva);
         return "reservas/detalle"; // Retorna la vista reservas/detalle.html
     }
 
     @PostMapping("/reservas/save")
     public String saveReservas(@ModelAttribute Reservas reserva, Model model) {
-        reservasRepository.save(reserva);
+        if (reserva.getId() == null || reserva.getId().isEmpty()) {
+            // Si no tiene id, MongoDB genera uno automáticamente
+            reservasRepository.save(reserva);
+        } else {
+            // Si tiene id (es una edición), se actualiza
+            reservasRepository.save(reserva);
+        }
         return "redirect:/clientes/reservas"; // Redirige a la lista de reservas
     }
+
+
 
     @GetMapping("/reservas/edit/{id}")
     public String editReservas(@PathVariable String id, Model model) {

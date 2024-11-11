@@ -18,9 +18,7 @@
     <div class="container">
         <h1 class="text-center" th:text="${cliente.id != null ? 'Editar Cliente' : 'Agregar Nuevo Cliente'}"></h1>
         <!-- Se envía la solicitud a /clientes/save para guardar el cliente -->
-       <form th:action="@{/clientes/save}" method="post">
-    <!-- Solo incluye el id si el cliente ya existe (para edición) -->
-    <input type="hidden" th:value="${cliente.id}" name="id"/>
+        <form th:action="@{/clientes/save}" method="post">
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" name="nombre" th:value="${cliente.nombre}" required/>
@@ -40,7 +38,7 @@
     <button type="submit" class="btn btn-success">Guardar</button>
     <a href="/clientes" class="btn btn-secondary">Volver a la Lista de Clientes</a>
 </form>
-       
+        
     </div>
 </body>
 </html>

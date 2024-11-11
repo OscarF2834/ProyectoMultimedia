@@ -17,15 +17,33 @@
 <body>
     <div class="container">
         <h1 class="text-center" th:text="${reserva.id != null ? 'Editar Reserva' : 'Agregar Nueva Reserva'}"></h1>
-        <form th:action="@{/reservas/save}" method="post">
-            <input type="hidden" th:value="${reserva.id}" name="id"/>
+        <form th:action="@{/clientes/reservas/save}" method="post">
+            <!-- El campo id ya no es necesario en el formulario de nueva reserva -->
+
+            <!-- Campo de fecha -->
             <div class="mb-3">
                 <label for="fechareserva" class="form-label">Fecha:</label>
                 <input type="date" id="fechareserva" name="fechareserva" class="form-control" th:value="${reserva.fechareserva}" required/>
             </div>
+
+            <!-- Campo de hora -->
+            <div class="mb-3">
+                <label for="horareserva" class="form-label">Hora:</label>
+                <input type="time" id="horareserva" name="horareserva" class="form-control" th:value="${reserva.horareserva}" required/>
+            </div>
+
+            <!-- Campo de número de personas -->
+            <div class="mb-3">
+                <label for="numeropersonas" class="form-label">Número de Personas:</label>
+                <input type="number" id="numeropersonas" name="numeropersonas" class="form-control" th:value="${reserva.numeropersonas}" required/>
+            </div>
+
+            <!-- Botón de enviar -->
             <button type="submit" class="btn btn-success">Guardar</button>
         </form>
-        <a href="/reservas" class="btn btn-secondary mt-3">Volver a la Lista de Reservas</a>
+
+        <!-- Enlace para volver a la lista de reservas -->
+        <a href="/clientes/reservas" class="btn btn-secondary mt-3">Volver a la Lista de Reservas</a>
     </div>
 </body>
 </html>
