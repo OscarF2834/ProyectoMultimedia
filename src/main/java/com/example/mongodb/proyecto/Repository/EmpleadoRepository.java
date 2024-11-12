@@ -5,5 +5,6 @@ import com.example.mongodb.proyecto.entity.Empleado;
 
 
 public interface EmpleadoRepository extends MongoRepository<Empleado, String> {
-
+	Empleado findByUser(String user);
 }
+ 
