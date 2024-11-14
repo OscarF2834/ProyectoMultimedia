@@ -9,6 +9,8 @@ public class Administrador {
 	
 	@Id
 	private String id;
+	private String user;
+	private String password;
 	private String identificacion;
 	private String nombre;
 	private String apellido;
@@ -20,10 +22,13 @@ public class Administrador {
 		
 	}
 
-	public Administrador(String id, String identificacion, String nombre, String apellido, String edad, String telefono,
-			String cargo) {
+	
+	public Administrador(String id, String user, String password, String identificacion, String nombre, String apellido,
+			String edad, String telefono, String cargo) {
 		super();
 		this.id = id;
+		this.user = user;
+		this.password = password;
 		this.identificacion = identificacion;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -31,6 +36,7 @@ public class Administrador {
 		this.telefono = telefono;
 		this.cargo = cargo;
 	}
+
 
 	public String getId() {
 		return id;
@@ -86,6 +92,26 @@ public class Administrador {
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
+	}
+
+
+	public String getUser() {
+		return user;
+	}
+
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	
