@@ -41,11 +41,15 @@
                         <form th:action="@{/administrador/empleados/delete/{id}(id=${empleado.id})}" method="post" style="display:inline;">
                              <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                         </form>
-                        
                     </td>
                 </tr>
             </tbody>
         </table>
+        
+        <!-- Botón de Regresar -->
+        <a href="/administrador/paginaprincipal" class="btn btn-secondary btn-sm mb-3">Regresar</a>
+        
+        <!-- Botón de Nuevo Empleado -->
         <a href="/administrador/empleados/new" class="btn btn-success">Nuevo Empleado</a>
     </div>
 </body>

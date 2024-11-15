@@ -59,16 +59,26 @@ public class LoginController {
     }
 
     @PostMapping("/login/empleado")
-    public String empleadorAuth(@RequestParam("user") String user, @RequestParam("password") String password, Model model) {
+    public String empleadoAuth(@RequestParam("user") String user, @RequestParam("password") String password, Model model) {
+        System.out.println("Usuario: " + user + ", Contraseña: " + password);  // Imprimir para depurar
         Empleado empleado = empleadoRepository.findByUser(user);
 
         if (empleado != null && empleado.getPassword().equals(password)) {
-            return "redirect:/empleado/"; 
+            System.out.println("Empleado autenticado: " + empleado.getNombre());  // Verificar si el empleado es encontrado
+            return "redirect:/empleados/paginaprincipal";
         }
 
         model.addAttribute("error", "Usuario o contraseña incorrecta");
         return "logins/Login-empleado";
     }
+
+    
+    @GetMapping("/empleados/paginaprincipal")
+    public String empleadoPage() {
+        return "empleados/paginaprincipal";  // Verifica que esta página exista en la ruta correcta
+    }
+
+
 
     @GetMapping("/login/cliente")
     public String clienteLogin() {
