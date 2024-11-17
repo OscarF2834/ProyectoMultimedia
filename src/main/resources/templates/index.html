@@ -17,9 +17,7 @@
         .header-image {
             width: 100%;
             height: 50vh;
-            background-image: url('https://www.example.com/your-image.jpg'); /* Cambia la URL por la imagen de tu restaurante */
-            background-size: cover;
-            background-position: center;
+            background-color: #ccc;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,33 +26,23 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .welcome-panel {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
+        .section {
+            padding: 40px;
             text-align: center;
-            margin-top: -30px;
-            font-size: 1.8em;
+            background-color: #ffffff;
             margin-bottom: 20px;
         }
 
-        .about-section {
-            padding: 40px;
-            background-color: #ffffff;
-            text-align: center;
-        }
-
-        .about-section h2 {
+        .section h2 {
             font-size: 2.5em;
             margin-bottom: 20px;
         }
 
-        .about-section p {
+        .section p {
             font-size: 1.1em;
             color: #555;
             line-height: 1.6;
+            margin-bottom: 20px;
         }
 
         .login-btn {
@@ -78,9 +66,7 @@
             color: white;
             text-align: center;
             padding: 10px 0;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
+            margin-top: 20px;
         }
 
         .footer p {
@@ -96,6 +82,14 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        .food-description {
+            margin-top: 15px;
+            font-size: 1em;
+            color: #444;
+            line-height: 1.5;
+        }
+
     </style>
 </head>
 <body>
@@ -106,15 +100,53 @@
     </div>
 
     <!-- Panel de bienvenida -->
-    <div class="welcome-panel">
-        <h4>El mejor lugar para disfrutar de la mejor comida</h4>
+    <div class="section">
+        <h2>Bienvenida</h2>
+        <p>El mejor lugar para disfrutar de la mejor comida.</p>
+    </div>
+
+    <!-- Misión -->
+    <div class="section">
+        <h2>Misión del restaurante</h2>
+        <p>Proporcionar una experiencia culinaria única con platos tradicionales y modernos, promoviendo un ambiente acogedor y familiar.</p>
+    </div>
+
+    <!-- Visión -->
+    <div class="section">
+        <h2>Visión</h2>
+        <p>Convertirnos en el restaurante favorito de nuestra comunidad, reconocido por la calidad de nuestros platos y nuestro servicio excepcional.</p>
     </div>
 
     <!-- Sobre Nosotros -->
-    <div class="about-section">
+    <div class="section">
         <h2>Sobre Nosotros</h2>
         <p>En Restaurante CAO, ofrecemos una experiencia culinaria única con platos tradicionales y modernos, preparados con los mejores ingredientes. Nuestro restaurante está diseñado para ofrecerte un ambiente acogedor y familiar, donde podrás disfrutar de una comida deliciosa mientras te relajas con tus seres queridos.</p>
-        <p>¡Te esperamos con los brazos abiertos!</p>
+    </div>
+
+    <!-- Sección de Comidas Típicas Colombianas -->
+    <div class="section">
+        <h2>Comidas Típicas Colombianas</h2>
+        <p>Descubre algunos de los platos más tradicionales de la gastronomía colombiana. Cada uno de ellos es una explosión de sabores que te transportarán al corazón de Colombia.</p>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Arepa de huevo</p>
+                <div class="food-description">
+                    <p>La arepa de huevo es una deliciosa receta de la región Caribe de Colombia. Consiste en una arepa frita rellena con huevo, que se cocina hasta que el interior quede suave y cremoso. Es un plato ideal para disfrutar en el desayuno o como snack, acompañado de una bebida refrescante.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <p>Bandeja paisa</p>
+                <div class="food-description">
+                    <p>La bandeja paisa es uno de los platos más emblemáticos de la región Andina de Colombia. Se compone de una generosa porción de arroz, frijoles, carne molida, chicharrón, arepa, huevo frito, aguacate y plátano maduro. Es un plato abundante y sabroso, ideal para los grandes apetitos.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <p>Ajiaco</p>
+                <div class="food-description">
+                    <p>El ajiaco es una sopa típica de Bogotá, preparada con tres tipos de papas, pollo, mazorca, guasca y otros ingredientes locales. Se sirve con crema de leche, alcaparras y aguacate, lo que le da un toque cremoso y fresco. Es un plato ideal para el clima frío de la capital colombiana.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Botón de ingreso al restaurante -->
