@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.mongodb.proyecto.Repository.ClienteRepository;
+import com.example.mongodb.proyecto.Repository.PedidosRepository;
+import com.example.mongodb.proyecto.Repository.ProductoRepository;
 import com.example.mongodb.proyecto.Repository.ReservasRepository;
 import com.example.mongodb.proyecto.entity.Cliente;
+import com.example.mongodb.proyecto.entity.Empleado;
+import com.example.mongodb.proyecto.entity.Pedidos;
+import com.example.mongodb.proyecto.entity.Producto;
 import com.example.mongodb.proyecto.entity.Reservas;
 import com.example.mongodb.proyecto.exception.NotFoundException;
 
@@ -30,9 +35,15 @@ public class ClienteWebController {
     @Autowired
     private ReservasRepository reservasRepository;
     
+    @Autowired
+    private ProductoRepository productoRepository;
+    
+    @Autowired
+    private PedidosRepository pedidosRepository;
+    
 
     // Métodos para clientes
-    @GetMapping("")
+    @GetMapping("/clientes")
     public String getAllClientes(Model model) {
         List<Cliente> clientes = clienteRepository.findAll();
         model.addAttribute("clientes", clientes);
@@ -121,6 +132,72 @@ public class ClienteWebController {
     public String newReserva(Model model) {
         model.addAttribute("reserva", new Reservas()); // Crear una nueva reserva vacía
         return "reservas/form"; // Devuelve la vista del formulario para agregar una nueva reserva
+    }
+    
+ 
+ // Métodos para Producto
+    @GetMapping("/productos")
+    public String getAllProductos(Model model) {
+        List<Producto> productos = productoRepository.findAll();
+        model.addAttribute("productos", productos);
+        return "productos/list"; // Retorna la vista productos/list.html
+    }
+
+    @GetMapping("/productos/{id}")
+    public String getProductoById(@PathVariable String id, Model model) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Producto no encontrado"));
+        model.addAttribute("producto", producto);
+        return "productos/detalle"; // Retorna la vista productos/detalle.html
+    }
+    
+    
+ // Controlador para pedidos
+    @GetMapping("/pedidos")
+    public String getAllPedidos(Model model) {
+        List<Pedidos> pedidos = pedidosRepository.findAll();
+        model.addAttribute("pedidos", pedidos);
+        return "pedidos/list"; // Retorna la vista pedidos/list.html
+    }
+
+    // Formulario de creación de nuevo pedido
+    @GetMapping("/pedidos/new")
+    public String newPedidosForm(Model model) {
+        model.addAttribute("pedidos", new Pedidos()); // Se agrega un objeto pedido vacío
+        return "pedidos/form"; // Retorna la vista pedidos/form.html
+    }
+
+    @GetMapping("/pedidos/{id}")
+    public String getPedidosById(@PathVariable String id, Model model) {
+        Pedidos pedido = pedidosRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Pedido no encontrado"));
+        model.addAttribute("pedido", pedido);
+        return "pedidos/detalle"; // Retorna la vista pedidos/detalle.html
+    }
+
+    // Método para guardar el pedido - Usando @ModelAttribute en lugar de @RequestBody
+    @PostMapping("/pedidos/save")
+    public String savePedidos(@ModelAttribute Pedidos pedido, Model model) {
+        pedidosRepository.save(pedido);
+        return "redirect:/pedidos"; // Redirige a la lista de pedidos después de guardar
+    }
+
+    // Método para editar un pedido
+    @GetMapping("/pedidos/editar/{id}")
+    public String editPedidos(@PathVariable String id, Model model) {
+        Pedidos pedido = pedidosRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Pedido no encontrado"));
+        model.addAttribute("pedido", pedido);
+        return "pedidos/form"; // Usa la vista pedidos/form.html para editar
+    }
+
+    // Controlador para eliminar un pedido
+    @PostMapping("/pedidos/delete/{id}")
+    public String deletePedidos(@PathVariable String id) {
+        Pedidos pedido = pedidosRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Pedido no encontrado"));
+        pedidosRepository.delete(pedido);
+        return "redirect:/pedidos"; // Redirige a la lista de pedidos después de eliminar
     }
 
 }

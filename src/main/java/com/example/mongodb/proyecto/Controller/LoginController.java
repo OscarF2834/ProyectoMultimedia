@@ -90,11 +90,16 @@ public class LoginController {
         Cliente cliente = clienteRepository.findByUser(user);
 
         if (cliente != null && cliente.getPassword().equals(password)) {
-            return "redirect:/cliente/"; 
+            return "redirect:/clientes/paginaprincipal"; 
         }
 
         model.addAttribute("error", "Usuario o contraseña incorrecta");
         return "logins/Login-cliente";
+    }
+    
+    @GetMapping("/clientes/paginaprincipal")
+    public String clientePage() {
+        return "clientes/paginaprincipal";  // Verifica que esta página exista en la ruta correcta
     }
 }
 

@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mongodb.proyecto.Repository.ClienteRepository;
+import com.example.mongodb.proyecto.Repository.PedidosRepository;
+import com.example.mongodb.proyecto.Repository.ProductoRepository;
 import com.example.mongodb.proyecto.Repository.ReservasRepository;
 import com.example.mongodb.proyecto.entity.Cliente;
+import com.example.mongodb.proyecto.entity.Empleado;
+import com.example.mongodb.proyecto.entity.Pedidos;
+import com.example.mongodb.proyecto.entity.Producto;
 import com.example.mongodb.proyecto.entity.Reservas;
 import com.example.mongodb.proyecto.exception.NotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,6 +34,12 @@ public class ClienteRestController {
 
     @Autowired
     private ReservasRepository reservasRepository;
+    
+    @Autowired
+    private ProductoRepository productoRepository;
+    
+    @Autowired
+    private PedidosRepository pedidosRepository;
 
     // Métodos para cliente
     @GetMapping("/cliente/")
@@ -94,5 +105,57 @@ public class ClienteRestController {
     	Reservas reservas = reservasRepository.findById(id).orElseThrow(() -> new NotFoundException("reservas no encontrado"));
     	reservasRepository.deleteById(id);
         return reservas;
+    }
+    
+    
+    @GetMapping("/productos/")
+    public List<Producto> getAllProductos() {
+        return productoRepository.findAll();
+    }
+
+    @GetMapping("/productos/{id}")
+    public Producto getProductoById(@PathVariable String id) {
+        return productoRepository.findById(id).orElseThrow(() -> new NotFoundException("Producto no encontrado"));
+    }
+
+    @PostMapping("/productos/")
+    public Producto saveProducto(@RequestBody Map<String, Object> body) {
+        ObjectMapper mapper = new ObjectMapper();
+        Producto producto = mapper.convertValue(body, Producto.class);
+        return productoRepository.save(producto);
+    } 
+    
+    
+ // Métodos para pedidos 
+    @GetMapping("/pedidos/")
+    public List<Pedidos> getAllPedidos() {
+        return pedidosRepository.findAll();
+    }
+
+    @GetMapping("/pedidos/{id}")
+    public Pedidos getPedidosById(@PathVariable String id) {
+        return pedidosRepository.findById(id).orElseThrow(() -> new NotFoundException("pedidos no encontrado"));
+    }
+
+    @PostMapping("/save")
+    public Pedidos savePedidos(@RequestBody Map<String, Object> body) {
+        ObjectMapper mapper = new ObjectMapper();
+        Pedidos pedidos = mapper.convertValue(body, Pedidos.class);
+        return pedidosRepository.save(pedidos);
+    }
+
+    @PutMapping("/pedidos/{id}")
+    public Pedidos updatePedidos(@PathVariable String id, @RequestBody Map<String, Object> body) {
+        ObjectMapper mapper = new ObjectMapper();
+        Pedidos pedidos = mapper.convertValue(body, Pedidos.class);
+        pedidos.setId(id);
+        return pedidosRepository.save(pedidos);
+    }
+
+    @DeleteMapping("/pedidos/{id}")
+    public Pedidos deletePedidos(@PathVariable String id) {
+    	Pedidos pedidos = pedidosRepository.findById(id).orElseThrow(() -> new NotFoundException("pedidos no encontrado"));
+    	pedidosRepository.deleteById(id);
+        return pedidos;
     }
 }
