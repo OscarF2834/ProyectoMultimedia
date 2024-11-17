@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bienvenido a Restaurante CAO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ+5v5vV3+XU7jJ6Fv4Tffv6Vg1xF5FQf6zSrl3il4vBv0r2F4pjs5uPslzV" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .header-image {
+            width: 100%;
+            height: 50vh;
+            background-image: url('https://www.example.com/your-image.jpg'); /* Cambia la URL por la imagen de tu restaurante */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .welcome-panel {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            text-align: center;
+            margin-top: -30px;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .about-section {
+            padding: 40px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .login-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #45a049;
+        }
+
+        .footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Imagen principal -->
+    <div class="header-image">
+        <h1>Bienvenidos a Restaurante CAO</h1>
+    </div>
+
+    <!-- Panel de bienvenida -->
+    <div class="welcome-panel">
+        <h4>El mejor lugar para disfrutar de la mejor comida</h4>
+    </div>
+
+    <!-- Sobre Nosotros -->
+    <div class="about-section">
+        <h2>Sobre Nosotros</h2>
+        <p>En Restaurante CAO, ofrecemos una experiencia culinaria única con platos tradicionales y modernos, preparados con los mejores ingredientes. Nuestro restaurante está diseñado para ofrecerte un ambiente acogedor y familiar, donde podrás disfrutar de una comida deliciosa mientras te relajas con tus seres queridos.</p>
+        <p>¡Te esperamos con los brazos abiertos!</p>
+    </div>
+
+    <!-- Botón de ingreso al restaurante -->
+    <div class="text-center">
+        <a href="login.html">
+            <button class="login-btn">Ingresa a Nuestro Restaurante</button>
+        </a>
+    </div>
+
+    <!-- Pie de página -->
+    <div class="footer">
+        <p>&copy; 2024 Restaurante CAO. Todos los derechos reservados.</p>
+        <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0d5jsnexveP4RxkwbStZv5apY1bVVs+d/g5ho5YZ5rXocpY3" crossorigin="anonymous"></script>
+
+</body>
+</html>
