@@ -23,16 +23,16 @@
 
         <div class="list-group">
             <div th:each="pedido : ${pedidos}" class="list-group-item">
-                <h5 th:text="'Cliente: ' + ${pedido.clienteId}"></h5> <!-- Mostrar nombre del cliente -->
-                <p th:text="'Producto: ' + ${pedido.productoId}"></p> <!-- Mostrar nombre del producto -->
-                <p th:text="'Fecha del Pedido: ' + ${pedido.fechapedido}"></p>
-                <p th:text="'Observaciones: ' + ${pedido.observaciones}"></p>
-                <a th:href="@{'/clientes/pedidos/' + ${pedido.id}}" class="btn btn-info btn-sm">Ver</a>
-                <a th:href="@{'/clientes/pedidos/editar/' + ${pedido.id}}" class="btn btn-warning btn-sm">Editar</a>
-                <form th:action="@{'/clientes/pedidos/delete/' + ${pedido.id}}" method="post" style="display: inline;">
-                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                </form>
-            </div>
+    <h5 th:text="'Cliente: ' + ${pedido.clienteNombre}"></h5> <!-- Mostrar nombre del cliente -->
+    <p th:text="'Producto: ' + ${pedido.productoNombre}"></p> <!-- Mostrar nombre del producto -->
+    <p th:text="'Fecha del Pedido: ' + ${pedido.fechapedido}"></p>
+    <p th:text="'Observaciones: ' + ${pedido.observaciones}"></p>
+    <a th:href="@{'/clientes/pedidos/' + ${pedido.id}}" class="btn btn-info btn-sm">Ver</a>
+    <a th:href="@{'/clientes/pedidos/editar/' + ${pedido.id}}" class="btn btn-warning btn-sm">Editar</a>
+    <form th:action="@{'/clientes/pedidos/delete/' + ${pedido.id}}" method="post" style="display: inline;">
+        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+    </form>
+</div>
         </div>
         <a href="/clientes/paginaprincipal" class="btn btn-secondary mb-3">Regresar</a>
     </div>

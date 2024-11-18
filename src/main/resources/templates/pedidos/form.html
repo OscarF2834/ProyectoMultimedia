@@ -23,22 +23,18 @@
             <div class="mb-3">
                 <label for="cliente" class="form-label">Cliente:</label>
                 <select id="cliente" name="clienteId" class="form-select" required>
-                    <option value="" disabled selected>Seleccione un cliente</option>
-                    <option th:each="cliente : ${clientes}" 
-                            th:value="${cliente.id}" 
-                            th:text="${cliente.nombre}"></option>
-                </select>
-            </div>
+    <option value="" disabled selected>Seleccione un cliente</option>
+    <option th:each="cliente : ${clientes}" 
+            th:value="${cliente.id}" 
+            th:text="${cliente.nombre}"></option>
+</select>
 
-            <!-- Campo de producto -->
-            <div class="mb-3">
-                <label for="producto" class="form-label">Producto:</label>
-                <select id="producto" name="productoId" class="form-select" required>
-                    <option value="" disabled selected>Seleccione un producto</option>
-                    <option th:each="producto : ${productos}" 
-                            th:value="${producto.id}" 
-                            th:text="${producto.nombre + ' - $' + producto.precio}"></option>
-                </select>
+<select id="producto" name="productoId" class="form-select" required>
+    <option value="" disabled selected>Seleccione un producto</option>
+    <option th:each="producto : ${productos}" 
+            th:value="${producto.id}" 
+            th:text="${producto.nombre + ' - $' + producto.precio}"></option>
+</select>
             </div>
 
             <!-- Campo de fecha del pedido -->

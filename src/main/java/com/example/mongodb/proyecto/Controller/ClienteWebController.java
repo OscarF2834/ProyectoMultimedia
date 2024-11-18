@@ -1,5 +1,6 @@
 package com.example.mongodb.proyecto.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -156,7 +157,19 @@ public class ClienteWebController {
     @GetMapping("/pedidos")
     public String getAllPedidos(Model model) {
         List<Pedidos> pedidos = pedidosRepository.findAll();
-        model.addAttribute("pedidos", pedidos);
+        List<Pedidos> pedidos1 = new ArrayList<>();
+        for (Pedidos pedido : pedidos) {
+            Cliente cliente = clienteRepository.findById(pedido.getClienteId()).orElse(null);
+            Producto producto = productoRepository.findById(pedido.getProductoId()).orElse(null);
+            Pedidos nuevoPedido = new Pedidos();
+            nuevoPedido.setId(pedido.getId());
+            nuevoPedido.setFechapedido(pedido.getFechapedido());
+            nuevoPedido.setObservaciones(pedido.getObservaciones());
+            nuevoPedido.setClienteNombre(cliente != null ? cliente.getNombre() : "Desconocido");
+            nuevoPedido.setProductoNombre(producto != null ? producto.getNombre() : "Desconocido");
+            pedidos1.add(nuevoPedido);
+        }
+        model.addAttribute("pedidos", pedidos1);
         return "pedidos/list";
     }
 
@@ -191,8 +204,17 @@ public class ClienteWebController {
     public String editPedidos(@PathVariable String id, Model model) {
         Pedidos pedido = pedidosRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Pedido no encontrado"));
+        
+        // Obtener todos los clientes y productos para la lista desplegable
+        List<Cliente> clientes = clienteRepository.findAll();
+        List<Producto> productos = productoRepository.findAll();
+        
+        // Agregar los datos al modelo
         model.addAttribute("pedido", pedido);
-        return "pedidos/form";
+        model.addAttribute("clientes", clientes); // Agregar clientes al modelo
+        model.addAttribute("productos", productos); // Agregar productos al modelo
+        
+        return "pedidos/form"; // Retorna la vista del formulario de pedidos
     }
 
     @PostMapping("/pedidos/delete/{id}")
