@@ -8,42 +8,72 @@
         body {
             background-color: #f4f4f9;
         }
+
         .container {
             margin-top: 50px;
+        }
+
+        .reserva-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .reserva-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .reserva-info {
+            margin-bottom: 10px;
+        }
+
+        .reserva-actions {
+            text-align: right;
+        }
+
+        .reserva-actions a, .reserva-actions button {
+            margin-left: 5px;
+        }
+
+        .btn-regresar {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1 class="text-center">Lista de Reservas</h1>
-        <a href="/clientes/reservas/new" class="btn btn-primary mb-3">Agregar Nueva Reserva</a>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Número de Personas</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="reserva : ${reservas}">
-                    <td th:text="${reserva.id}"></td>
-                    <td th:text="${reserva.fechareserva}"></td>
-                    <td th:text="${reserva.horareserva}"></td>
-                    <td th:text="${reserva.numeropersonas}"></td>
-                    <td>
-                        <a th:href="@{/clientes/reservas/{id}(id=${reserva.id})}" class="btn btn-info btn-sm">Ver Detalles</a>
-                        <a th:href="@{/clientes/reservas/edit/{id}(id=${reserva.id})}" class="btn btn-warning btn-sm">Editar</a>
-                        <a th:href="@{/clientes/reservas/delete/{id}(id=${reserva.id})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar reserva?')">Eliminar</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 
-        <!-- Botón de Regresar -->
-        <a href="/empleados/paginaprincipal" class="btn btn-secondary btn-sm mb-3">Regresar</a>
+        <!-- Botón de Nueva Reserva -->
+        <div class="d-flex justify-content-between mb-4">
+            <a href="/empleados/paginaprincipal" class="btn btn-secondary btn-sm btn-regresar">Regresar</a>
+            <a href="/clientes/reservas/new" class="btn btn-primary">Agregar Nueva Reserva</a>
+        </div>
+
+        <!-- Div para cada reserva -->
+        <div th:each="reserva : ${reservas}" class="reserva-card">
+            <div class="reserva-info">
+                <h5>ID: <span th:text="${reserva.id}">ID</span></h5>
+                <p>Fecha: <strong th:text="${reserva.fechareserva}">Fecha</strong></p>
+                <p>Hora: <strong th:text="${reserva.horareserva}">Hora</strong></p>
+                <p>Número de Personas: <strong th:text="${reserva.numeropersonas}">Número de Personas</strong></p>
+            </div>
+            <div class="reserva-actions">
+                <!-- Ver detalles -->
+                <a th:href="@{/clientes/reservas/{id}(id=${reserva.id})}" class="btn btn-info btn-sm">Ver Detalles</a>
+                
+                <!-- Editar reserva -->
+                <a th:href="@{/clientes/reservas/edit/{id}(id=${reserva.id})}" class="btn btn-warning btn-sm">Editar</a>
+                
+                <!-- Eliminar reserva -->
+                <a th:href="@{/clientes/reservas/delete/{id}(id=${reserva.id})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar reserva?')">Eliminar</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

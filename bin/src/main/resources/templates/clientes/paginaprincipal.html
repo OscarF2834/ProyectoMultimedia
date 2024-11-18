@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Empleado</title>
+    <title>Panel de Cliente</title>
     <!-- Vinculamos Bootstrap desde un CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ8vPmh3Vv6ffm7+T5y+74i2xkX7uC+p9v+y5j8dCwovx2w7HfrPz+rX1E1M" crossorigin="anonymous">
     <style>
@@ -76,11 +76,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Bienvenido, Empleado</h1>
+        <h1>Bienvenido, Cliente</h1>
         <div class="admin-buttons">
             <!-- Botones en formato vertical -->
-            <a href="/empleados/reservas" class="btn btn-custom">Ver Reservas</a>
-            <a href="/empleados/productos" class="btn btn-custom">Actualizar Pedidos</a>
+            <a href="/clientes/reservas" class="btn btn-custom">Ver Reservas</a>
+            <a href="/clientes/productos" class="btn btn-custom">Ver Menu</a>
+			<a href="/clientes/pedidos" class="btn btn-custom">Pedidos</a>
+			
             <!-- Botón de Regresar -->
             <a href="/login/empleado" class="btn btn-custom" style="background-color: #28a745;">Regresar</a>
         </div>

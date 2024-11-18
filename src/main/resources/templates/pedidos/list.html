@@ -8,73 +8,33 @@
         body {
             background-color: #f4f4f9;
         }
-
         .container {
             margin-top: 50px;
-        }
-
-        .pedido-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .pedido-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .pedido-info {
-            margin-bottom: 10px;
-        }
-
-        .pedido-actions {
-            text-align: right;
-        }
-
-        .pedido-actions a, .pedido-actions button {
-            margin-left: 5px;
-        }
-
-        .btn-regresar {
-            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center">Lista de Pedidos</h1>
+        <h1>Lista de Pedidos</h1>
+        
+        <!-- Botón de Regresar -->
 
-        <!-- Botón de Nuevo Pedido -->
-        <div class="d-flex justify-content-between mb-4">
-            <a href="/clientes/paginaprincipal" class="btn btn-secondary btn-sm btn-regresar">Regresar</a>
-            <a href="/clientes/pedidos/new" class="btn btn-primary">Agregar Nuevo Pedido</a>
-        </div>
+        <a href="/clientes/pedidos/new" class="btn btn-primary mb-3">Nuevo Pedido</a>
 
-        <!-- Div para cada pedido -->
-        <div th:each="pedido : ${pedidos}" class="pedido-card">
-            <div class="pedido-info">
-                <h5>ID: <span th:text="${pedido.id}">ID</span></h5> <!-- Cambiar ${pedidos.id} a ${pedido.id} -->
-                <p>Fecha de Pedido: <strong th:text="${pedido.fechapedido}">Fecha de Pedido</strong></p> <!-- Cambiar ${pedidos.fechapedido} a ${pedido.fechapedido} -->
-                <p>Observaciones: <strong th:text="${pedido.observaciones}">Observaciones</strong></p> <!-- Cambiar ${pedidos.observaciones} a ${pedido.observaciones} -->
-            </div>
-            <div class="pedido-actions">
-                <!-- Ver detalles -->
-                <a th:href="@{/pedidos/{id}(id=${pedido.id})}" class="btn btn-info btn-sm">Ver Detalles</a> <!-- Cambiar ${pedidos.id} a ${pedido.id} -->
-                
-                <!-- Editar pedido -->
-                <a th:href="@{/pedidos/editar/{id}(id=${pedido.id})}" class="btn btn-warning btn-sm">Editar</a> <!-- Cambiar ${pedidos.id} a ${pedido.id} -->
-                
-                <!-- Eliminar pedido -->
-                <a th:href="@{/pedidos/delete/{id}(id=${pedido.id})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar pedido?')">Eliminar</a> <!-- Cambiar ${pedidos.id} a ${pedido.id} -->
+        <div class="list-group">
+            <div th:each="pedido : ${pedidos}" class="list-group-item">
+                <h5 th:text="'Cliente: ' + ${pedido.clienteId}"></h5> <!-- Mostrar nombre del cliente -->
+                <p th:text="'Producto: ' + ${pedido.productoId}"></p> <!-- Mostrar nombre del producto -->
+                <p th:text="'Fecha del Pedido: ' + ${pedido.fechapedido}"></p>
+                <p th:text="'Observaciones: ' + ${pedido.observaciones}"></p>
+                <a th:href="@{'/clientes/pedidos/' + ${pedido.id}}" class="btn btn-info btn-sm">Ver</a>
+                <a th:href="@{'/clientes/pedidos/editar/' + ${pedido.id}}" class="btn btn-warning btn-sm">Editar</a>
+                <form th:action="@{'/clientes/pedidos/delete/' + ${pedido.id}}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
             </div>
         </div>
+        <a href="/clientes/paginaprincipal" class="btn btn-secondary mb-3">Regresar</a>
     </div>
 </body>
 </html>
-
-

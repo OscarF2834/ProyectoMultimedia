@@ -16,33 +16,48 @@
 </head>
 <body>
     <div class="container">
-        <h1 th:text="${pedidos.id != null ? 'Editar Pedido' : 'Agregar Nuevo Pedido'}"></h1>
-        <form th:action="@{/pedidos/save}" method="post">
+        <h1 th:text="${pedido != null and pedido.id != null ? 'Editar Pedido' : 'Agregar Nuevo Pedido'}"></h1>
 
-            <!-- Campo de ID (solo para editar) -->
+        <form th:action="@{/clientes/pedidos/save}" method="post">
+            <!-- Campo de cliente -->
             <div class="mb-3">
-                <label for="id" class="form-label">ID del Pedido:</label>
-                <input type="text" id="id" name="id" class="form-control" th:value="${pedidos.id}" readonly/>
+                <label for="cliente" class="form-label">Cliente:</label>
+                <select id="cliente" name="clienteId" class="form-select" required>
+                    <option value="" disabled selected>Seleccione un cliente</option>
+                    <option th:each="cliente : ${clientes}" 
+                            th:value="${cliente.id}" 
+                            th:text="${cliente.nombre}"></option>
+                </select>
+            </div>
+
+            <!-- Campo de producto -->
+            <div class="mb-3">
+                <label for="producto" class="form-label">Producto:</label>
+                <select id="producto" name="productoId" class="form-select" required>
+                    <option value="" disabled selected>Seleccione un producto</option>
+                    <option th:each="producto : ${productos}" 
+                            th:value="${producto.id}" 
+                            th:text="${producto.nombre + ' - $' + producto.precio}"></option>
+                </select>
             </div>
 
             <!-- Campo de fecha del pedido -->
             <div class="mb-3">
                 <label for="fechapedido" class="form-label">Fecha del Pedido:</label>
-                <input type="date" id="fechapedido" name="fechapedido" class="form-control" th:value="${pedidos.fechapedido}" required/>
+                <input type="date" id="fechapedido" name="fechapedido" class="form-control" th:value="${pedido?.fechapedido}" required />
             </div>
 
             <!-- Campo de observaciones -->
             <div class="mb-3">
                 <label for="observaciones" class="form-label">Observaciones:</label>
-                <textarea id="observaciones" name="observaciones" class="form-control" rows="4" th:value="${pedidos.observaciones}" required></textarea>
+                <textarea id="observaciones" name="observaciones" class="form-control" rows="4" th:text="${pedido?.observaciones}" required></textarea>
             </div>
 
-            <!-- Botón de enviar -->
             <button type="submit" class="btn btn-success">Guardar</button>
         </form>
 
         <!-- Enlace para volver a la lista de pedidos -->
-        <a href="/pedidos/list" class="btn btn-secondary mt-3">Volver a la Lista de Pedidos</a>
+        <a href="/clientes/pedidos" class="btn btn-secondary mt-3">Volver a la Lista de Pedidos</a>
     </div>
 </body>
 </html>
