@@ -77,9 +77,24 @@
             box-shadow: none;
         }
 
-        /* Botón regresar con otro estilo */
+        /* Estilo especial para el botón regresar */
+        .btn-green-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
         .btn-green {
             background-color: #28a745; /* Verde */
+            color: white;
+            padding: 10px 20px; /* Botón más pequeño */
+            font-size: 1rem;
+            text-align: center;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .btn-green:hover {
@@ -103,7 +118,11 @@
             <a href="/administrador/empleados" class="admin-button"> Empleados</a>
             <a href="/administrador/productos" class="admin-button"> Productos</a>
             <a href="/clientes/clientes" class="admin-button"> Clientes</a>
-            <a href="/login/administrador" class="admin-button btn-green">Regresar</a>
+        </div>
+
+        <!-- Botón regresar centrado -->
+        <div class="btn-green-container">
+            <a href="/login/administrador" class="btn-green">Regresar</a>
         </div>
     </div>
 

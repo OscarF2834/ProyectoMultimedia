@@ -72,7 +72,7 @@ public class ClienteWebController {
         } else {
             clienteRepository.save(cliente);  // Si el id ya está presente, actualiza el cliente
         }
-        return "redirect:/clientes"; // Redirige a la lista de clientes
+        return "redirect:/clientes/clientes"; // Redirige a la lista de clientes
     }
 
     @GetMapping("/edit/{id}")
@@ -188,8 +188,17 @@ public class ClienteWebController {
     public String getPedidosById(@PathVariable String id, Model model) {
         Pedidos pedido = pedidosRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Pedido no encontrado"));
+        
+        // Obtiene cliente y producto relacionados
+        Cliente cliente = clienteRepository.findById(pedido.getClienteId()).orElse(null);
+        Producto producto = productoRepository.findById(pedido.getProductoId()).orElse(null);
+        
+        // Asigna los nombres
+        pedido.setClienteNombre(cliente != null ? cliente.getNombre() : "Cliente desconocido");
+        pedido.setProductoNombre(producto != null ? producto.getNombre() : "Producto desconocido");
+        
         model.addAttribute("pedido", pedido);
-        return "pedidos/detalle";
+        return "pedidos/detalle"; // Retorna la vista pedidos/detalle.html
     }
 
     @PostMapping("/pedidos/save")
