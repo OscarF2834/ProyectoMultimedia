@@ -26,7 +26,7 @@ public class LoginController {
 
     @GetMapping("/")
     public String landingPage() {
-        return "logins/Rol"; 
+        return "index"; 
     }
 
     @GetMapping("/login/administrador")
